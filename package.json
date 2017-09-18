@@ -1,5 +1,5 @@
 {
-  "name": "@olympusat/react-oly-gate",
+  "name": "react-oly-gate",
   "version": "1.0.0",
   "description": "Olympusat React Gate",
   "main": "index.js",
@@ -9,11 +9,11 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@github.com:OlympusatDevelopment/react-oly-gate.git"
   },
   "author": "Adam Gedney <adam@olympusat.com>",
   "license": "ISC",
-  "homepage": "",
+  "homepage": "https://github.com/OlympusatDevelopment/react-oly-gate",
   "devDependencies": {
     "babel-core": "^6.10.4",
     "babel-plugin-transform-react-jsx": "^6.23.0",
