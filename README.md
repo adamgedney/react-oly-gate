@@ -1,18 +1,24 @@
+Npm: https://www.npmjs.com/package/react-oly-gate
+
 #### Usage
 To add the Authentication gate and the Centralizer to your project:
 1. Include the oly-sdk & react-oly-gate package
 2. Import the Gate & instantiate it with your branding info and credentials
 
+```
+npm i -S oly-sdk react-oly-gate
+```
+
 
 ```
-import {Oly} from '@olympusat/oly-sdk';
-import {Gate} from '@olympusat/react-oly-gate';
-import getOlySdkOptions from "./olySdkOptions";
-import getOlyGateOptions from "./olyGateOptions";
-new Oly(getOlySdkOptions());
-new Gate(getOlyGateOptions());
+  import {Oly} from '@olympusat/oly-sdk';
+  import {Gate} from '@olympusat/react-oly-gate';
 
+  import getOlySdkOptions from "./olySdkOptions";
+  import getOlyGateOptions from "./olyGateOptions";
 
+  new Oly(getOlySdkOptions());
+  new Gate(getOlyGateOptions());
 ```
 
 ## Referrer
