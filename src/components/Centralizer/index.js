@@ -19,17 +19,18 @@ const events = new Events();
 export class Centralizer extends Component{
 	constructor(props){
         super(props); 
+        
 		this.state = {
 			interface: MAIN_MENU,
 			showContainer : false,
 			showAppContainer : false
-        }
-        
-        this.toggleContainer = this.toggleContainer.bind(this);
-        this.toggleAppContainer = this.toggleAppContainer.bind(this);
-        this.toggleUserDetails = this.toggleUserDetails.bind(this);
-        this.toggleProfileUpload = this.toggleProfileUpload.bind(this);
     }
+        
+      this.toggleContainer = this.toggleContainer.bind(this);
+      this.toggleAppContainer = this.toggleAppContainer.bind(this);
+      this.toggleUserDetails = this.toggleUserDetails.bind(this);
+      this.toggleProfileUpload = this.toggleProfileUpload.bind(this);
+  }
     
 //componentWillReceiveProps
 	componentWillMount(){
@@ -158,7 +159,7 @@ export class Centralizer extends Component{
             {options} = this.props,
 			  user = this.state.user;
 		let Container = '',
-            AppCentralizer = '',
+      AppCentralizer = (<div className="olyauth__centralizerAppsIcon" style={styles.apps} onClick={this.toggleAppContainer.bind(this)}></div>),
 			AppContainer = '',
 			Interface = '';
 
@@ -174,10 +175,10 @@ export class Centralizer extends Component{
 				break;
 		}
 
-        // Setting to hide the app icon for apps that don't need it
-        if(!options.hideAppCentralizer){
-            AppCentralizer = (<div className="olyauth__centralizerAppsIcon" style={styles.apps} onClick={this.toggleAppContainer.bind(this)}></div>);
-        }
+    // Setting to hide the app icon for apps that don't need it
+    if(options.hideAppCentralizer){
+        AppCentralizer = '';
+    }
 
 		/**
 		 * Toggle the interface containers

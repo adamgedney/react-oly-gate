@@ -3,113 +3,113 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Gate} from '../components/Gate';
-import {Centralizer} from '../components/Centralizer';
+import { Gate } from '../components/Gate';
+import { Centralizer } from '../components/Centralizer';
 // import {AppsModel} from '../models/AppsModel';
 // import {UserController} from './UserController';
 // import {Events} from '../Events';
 
-import { 
-  Events, 
+import {
+  Events,
   Controllers,
-  Models 
+  Models
 } from '@olympusat/oly-sdk';
- 
-const {UserController} = Controllers;
-const {AppsModel} = Models;
 
-export function UIController(options){ 
-    const userController = new UserController(options);
-    const appsModel = new AppsModel(options);
-    const events = new Events(options); 
+const { UserController } = Controllers;
+const { AppsModel } = Models;
 
-    /**
-	 * Centralizer is the user avatar and decentralized app centralizer that get put in the top corner of the user's screen.
-	 */
-	this.showCentralizer = ()=>{
-        this.hideGate();
-		let self = this,
-			  wrapper = document.createElement("div"),
-			  script = document.createElement( 'script' );
+export function UIController(options) {
+  const userController = new UserController(options);
+  const appsModel = new AppsModel(options);
+  const events = new Events(options);
 
-		wrapper.id = 'olyauth__centralizer';
-		wrapper.style.position = 'absolute';
-		wrapper.style.top = '0';
-		wrapper.style.right = '0';
+  /**
+ * Centralizer is the user avatar and decentralized app centralizer that get put in the top corner of the user's screen.
+ */
+  this.showCentralizer = () => {
+    this.hideGate();
+    let self = this,
+      wrapper = document.createElement("div"),
+      script = document.createElement('script');
 
-		script.type = 'text/javascript';
-		script.src = 'https://use.fontawesome.com/33c67670ff.js';// Includes fontawesome, a dependency of the Centralizer component
+    wrapper.id = 'olyauth__centralizer';
+    wrapper.style.position = 'absolute';
+    wrapper.style.top = '0';
+    wrapper.style.right = '0';
 
-		document.body.appendChild(script);
-		document.body.appendChild(wrapper); 
+    script.type = 'text/javascript';
+    script.src = 'https://use.fontawesome.com/33c67670ff.js';// Includes fontawesome, a dependency of the Centralizer component
 
-        // Get the user before we render anything
-        userController.getCurrentUser()  
-            .then(user=>{
-                return appsModel.listActive() 
-                    .then(apps=>{
-                        const $injectElem = document.getElementById('olyauth__centralizer');
+    document.body.appendChild(script);
+    document.body.appendChild(wrapper);
 
-                        // console.log('SDK USer',user,apps);
-                        if($injectElem){
-                            ReactDOM.render(<Centralizer user={user} apps={apps} options={options}/>, $injectElem);
+    // Get the user before we render anything
+    userController.getCurrentUser()
+      .then(user => {
+        return appsModel.listActive()
+          .then(apps => {
+            const $injectElem = document.getElementById('olyauth__centralizer');
 
-                            events.onCentralizerShow({user,apps});//HOOK
-                        }
-                    });
-            });
-    };
-        
-	this.hideCentralizer = ()=>{
-		const $injectElem = document.getElementById('olyauth__centralizer');
+            // console.log('SDK USer',user,apps);
+            if ($injectElem) {
+              ReactDOM.render(<Centralizer user={user} apps={apps} options={options} />, $injectElem);
 
-		if($injectElem){
-            document.body.removeChild($injectElem);
+              events.onCentralizerShow({ user, apps });//HOOK
+            }
+          });
+      });
+  };
 
-            events.onCentralizerHide(true);//HOOK
-		}
-    };
-    
-    /**
-	 * Creates a new element and appends the React component
-	 */
-	this.showGate = ()=>{
-        this.hideCentralizer();
-		const self = this,
-              wrapper = document.createElement("div");
-                
-		wrapper.id = 'olyauth__wrapper';
-		wrapper.style.position = 'absolute';
-		wrapper.style.top = '0';
-		wrapper.style.right = '0';
-		wrapper.style.bottom = '0';
-		wrapper.style.left = '0';
+  this.hideCentralizer = () => {
+    const $injectElem = document.getElementById('olyauth__centralizer');
 
-		document.body.appendChild(wrapper);
+    if ($injectElem) {
+      document.body.removeChild($injectElem);
 
-        const $injectElem = document.getElementById('olyauth__wrapper');
-        
-        if($injectElem){
-            ReactDOM.render(<Gate component={{slug:'login',options}} />,$injectElem);
-
-            events.onGateShow(true);//HOOK
-        }
+      events.onCentralizerHide(true);//HOOK
     }
-    
-	this.hideGate = ()=>{
-        const $injectElem = document.getElementById('olyauth__wrapper');
+  };
 
-        if($injectElem){
-            document.body.removeChild($injectElem);
+  /**
+ * Creates a new element and appends the React component
+ */
+  this.showGate = () => {
+    this.hideCentralizer();
+    const self = this,
+      wrapper = document.createElement("div");
 
-            events.onGateHide(true);//HOOK
-        }
+    wrapper.id = 'olyauth__wrapper';
+    wrapper.style.position = 'absolute';
+    wrapper.style.top = '0';
+    wrapper.style.right = '0';
+    wrapper.style.bottom = '0';
+    wrapper.style.left = '0';
+
+    document.body.appendChild(wrapper);
+
+    const $injectElem = document.getElementById('olyauth__wrapper');
+console.log($injectElem);
+    if ($injectElem) {
+      ReactDOM.render(<Gate component={{ slug: 'login', options }} />, $injectElem);
+
+      events.onGateShow(true);//HOOK
     }
+  }
 
-	return {
-        showCentralizer:this.showCentralizer,
-        hideCentralizer:this.hideCentralizer,
-        showGate:this.showGate,
-        hideGate:this.hideGate
-	}
+  this.hideGate = () => {
+    const $injectElem = document.getElementById('olyauth__wrapper');
+
+    if ($injectElem) {
+      document.body.removeChild($injectElem);
+
+      events.onGateHide(true);//HOOK
+    }
+  }
+
+  return {
+    showCentralizer: this.showCentralizer,
+    hideCentralizer: this.hideCentralizer,
+    showGate: this.showGate,
+    hideGate: this.hideGate
+  }
 }

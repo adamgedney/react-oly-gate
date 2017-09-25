@@ -1,6 +1,6 @@
 {
   "name": "react-oly-gate",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Olympusat React Gate",
   "main": "index.js",
   "scripts": {

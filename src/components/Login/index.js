@@ -57,7 +57,7 @@ export class Login extends Component{
 	render(){
 		const self = this,
 			  parentStyles = this.props.parentStyles;
-console.log('TESTTTTT',utils.getTitleFromOptions('login','h1'));
+// console.log('TESTTTTT',utils.getTitleFromOptions('login','h1'));
 		return (
 			<div className="olyauth__login" style={styles.login}>
 				<h1 style={parentStyles.h1}>{utils.getTitleFromOptions('login','h1') || `Login`}</h1>

@@ -9,11 +9,11 @@ const {
   GateController,
   UserController,
   SessionController,
-  PermissionsController,
+  PermissionsController, 
   AuthController,
 } = Controllers; 
+const pjson = require('../package.json');
 
-let OA = undefined; 
 /** 
  * Entry point for beginning the Gate behaviors & Auth flows
  * the config argument is the main configuration object passed to the instantitation
@@ -23,33 +23,31 @@ let OA = undefined;
 function Gate(options){  
     utils.options = options;
 
-    OA = window.Oly;
-    
-    // Merge our options into the sdk options
-    window.Oly.options = Object.assign({},window.Oly.options,options);
-
     if(window.Oly){
+      // Merge our options into the sdk options
+      window.Oly.options = Object.assign({},window.Oly.options,options);
+
       window.Oly.UI = new UIController(options);
     }
     
-    if(options.debugMode){ 
-        console.log(`@olympusat/oly-sdk | version ${OA.meta.version}`);
-    }
-
-	/**
+    // if(options.debugMode){ 
+        console.log(`react-oly-gate | version ${pjson.version}`);
+    // }
+ 
+	/** 
 	 * Show the gate if the user isn't logged in
 	 */
-	if (OA && OA.Permissions.loggedIn()) { 
-        OA.UI.showCentralizer(); 
-	}else{  
+  if (window.Oly && window.Oly.Permissions.loggedIn()) { 
+    window.Oly.UI.showCentralizer(); 
+  }else{  
         if(options.displayOnAuthPage){
             // Handle displaying as a modal based on login button click here
         }else{
-          if(OA){
-            OA.UI.showGate();            
+          if(window.Oly){
+            window.Oly.UI.showGate();            
           }        
         }
-	}
+  }
 }
 
 export {
