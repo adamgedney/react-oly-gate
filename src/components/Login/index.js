@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 // import utils,{l} from '../../utils';
 import {default as styles} from './styles';
 // import {Storage} from '../../Storage';
-import { Storage, utils } from '@olympusat/oly-sdk'; 
+import { Storage, utils } from '@olympusat/oly-sdk';  
 
 const {
     REFERRER_LS_KEY, 

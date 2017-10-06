@@ -88,7 +88,7 @@ export function UIController(options) {
     document.body.appendChild(wrapper);
 
     const $injectElem = document.getElementById('olyauth__wrapper');
-console.log($injectElem);
+
     if ($injectElem) {
       ReactDOM.render(<Gate component={{ slug: 'login', options }} />, $injectElem);
 
