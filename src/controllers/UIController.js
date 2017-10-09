@@ -66,7 +66,7 @@ export function UIController(options) {
     if ($injectElem) {
       document.body.removeChild($injectElem);
 
-      events.onCentralizerHide(true);//HOOK
+      events.onCentralizerHide(true);//HOOK 
     }
   };
 

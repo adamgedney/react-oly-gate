@@ -1,5 +1,5 @@
 import { Gate } from './Gate';
 
-export default{
+export default{ 
     Gate
 };
