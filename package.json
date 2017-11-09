@@ -1,6 +1,6 @@
 {
   "name": "react-oly-gate",
-  "version": "1.0.6",
+  "version": "3.5.4",
   "description": "Olympusat React Gate",
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,7 @@
     "watchify": "^3.7.0"
   },
   "dependencies": {
-    "@olympusat/oly-sdk": "^3.3.8",
+    "@olympusat/oly-sdk": "^3.5.2",
     "amazon-cognito-identity-js": "1.8.0",
     "aws-sdk": "2.7.9",
     "axios": "^0.15.3",

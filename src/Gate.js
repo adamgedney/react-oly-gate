@@ -1,17 +1,17 @@
-import {UIController} from './controllers/UIController';
+import { UIController } from './controllers/UIController';
 
-import { 
+import {
   Controllers,
-  utils 
+  utils
 } from '@olympusat/oly-sdk';
 
 const {
   GateController,
   UserController,
   SessionController,
-  PermissionsController, 
+  PermissionsController,
   AuthController,
-} = Controllers; 
+} = Controllers;
 const pjson = require('../package.json');
 
 /** 
@@ -20,36 +20,54 @@ const pjson = require('../package.json');
  * @param options
  * @constructor
  */
-function Gate(options){  
-    utils.options = options;
+function Gate(options) {
+  utils.options = options; 
+  const debugLogger = options.debugMode ? console.log : () => { };
 
-    if(window.Oly){
-      // Merge our options into the sdk options
-      window.Oly.options = Object.assign({},window.Oly.options,options);
+  if (window.Oly) {
+    // Merge our options into the sdk options
+    window.Oly.options = Object.assign({}, window.Oly.options, options);
 
-      window.Oly.UI = new UIController(options);
-    }
-    
-    // if(options.debugMode){ 
-        console.log(`react-oly-gate | version ${pjson.version}`);
-    // }
- 
-	/** 
-	 * Show the gate if the user isn't logged in
-	 */
-  if (window.Oly && window.Oly.Permissions.loggedIn()) { 
-    window.Oly.UI.showCentralizer(); 
-  }else{  
-        if(options.displayOnAuthPage){
-            // Handle displaying as a modal based on login button click here
-        }else{
-          if(window.Oly){
-            window.Oly.UI.showGate();            
-          }        
-        }
+    window.Oly.UI = new UIController(options);
   }
+
+  // if(options.debugMode){ 
+  console.log(`react-oly-gate | version ${pjson.version}`);
+  // }
+
+	/** 
+	 * Show the gate if the user isn't logged in.
+   * Defer 1 second to allow time for token refresh to kick in on page refreshes.
+   * @todo Move the triggering of show and hide to an event
+	 */
+  const revealGate = (options, window) => {
+    debugLogger('** ROG : revealGate Ran',
+      window.Oly && window.Oly.Permissions.loggedIn(),
+      window.Oly.Permissions.loggedIn(),
+      window.Oly
+    );
+    if (window.Oly && window.Oly.Permissions.loggedIn()) {
+      debugLogger('** ROG : revealGate Ran showCentralizer');
+      window.Oly.UI.showCentralizer();
+    } else {
+      if (options.displayOnAuthPage) {
+        // Handle displaying as a modal based on login button click here
+      } else {
+        if (window.Oly) {
+          debugLogger('** ROG : revealGate Ran showGate');
+          window.Oly.UI.showGate();
+        }
+      }
+    }
+  };
+
+  debugLogger('** ROG : Gate Initialized : Logged in? -> ',window.Oly.Permissions.loggedIn());
+  setTimeout(function () {
+    debugLogger('** ROG : Reveal Gate Started after 1 sec. | Logged in? -> ',window.Oly.Permissions.loggedIn());
+    revealGate(options, window);
+  }, 1000);
 }
 
 export {
-  Gate 
+  Gate
 };
