@@ -63,9 +63,9 @@ function Gate(options) {
 
   debugLogger('** ROG : Gate Initialized : Logged in? -> ',window.Oly.Permissions.loggedIn());
   setTimeout(function () {
-    debugLogger('** ROG : Reveal Gate Started after 1 sec. | Logged in? -> ',window.Oly.Permissions.loggedIn());
+    debugLogger('** ROG : Reveal Gate Started after 2 sec. | Logged in? -> ',window.Oly.Permissions.loggedIn());
     revealGate(options, window);
-  }, 1000);
+  }, 2000); 
 }
 
 export {
